@@ -1,0 +1,15 @@
+services:
+  mysql-test:
+    image: mysql:8.0.35
+    environment:
+      MYSQL_DATABASE: survey_test
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    tmpfs:
+      - /var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
